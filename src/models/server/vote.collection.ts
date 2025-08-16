@@ -14,7 +14,7 @@ export default async function createVoteCollection() {
         ])
     console.log("Vote collection created successfully");
 
-    //create attributes and indexes
+    //create attributes
     await Promise.all([
             databases.createStringAttribute(db, voteCollection, "votedById", 50, true),
             databases.createStringAttribute(db, voteCollection, "typeId", 50, true),

@@ -15,7 +15,7 @@ export default async function createQuestionCollection() {
     console.log("Question collection created successfully");
     
 
-    //create attributes and indexes
+    //create attributes
     await Promise.all([
         databases.createStringAttribute(db, questionCollection, "title", 100, true),
         databases.createStringAttribute(db, questionCollection, "content", 10000, true),
@@ -28,6 +28,7 @@ export default async function createQuestionCollection() {
 
     //create Indexes
     await Promise.all([
+        /*
         databases.createIndex(
             db,
             questionCollection,
@@ -36,6 +37,8 @@ export default async function createQuestionCollection() {
             ["title"],
             ['asc']
         ),
+                created manually coz it couldn't be created by code, but its there
+        */
         databases.createIndex(
             db,
             questionCollection,
