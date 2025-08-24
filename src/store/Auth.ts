@@ -10,11 +10,13 @@ export interface UserPrefs {
     reputation: number
 }
 interface IAuthStore {
+    // STATE PROPERTIES
     session: Models.Session | null;
     jwt: string | null
     user: Models.User<UserPrefs> | null
     hydrated: boolean
 
+    // ACTIONS
     setHydrated(): void;
     verifySession(): Promise<void>;
     login(
@@ -42,21 +44,21 @@ interface IAuthStore {
 }
 
 export const useAuthStore = create<IAuthStore>()(
-    persist(
-        immer((set) => ({
+    persist(                    // Middleware: Save to localStorage
+        immer((set) => ({       // Middleware: Immutable updates
             session: null,
             jwt: null,
             user: null,
             hydrated: false,
 
             setHydrated() {
-                set({hydrated: true})
+                set({hydrated: true})   // Mark store as loaded from localStorage
             },
 
             async verifySession(){
                 try{
-                    const session = await account.getSession("current")
-                    set({session})
+                    const session = await account.getSession("current")         // Get current session from Appwrite
+                    set({session})                                              // Update store with session
 
                 } catch(error){
                     console.log(error);
@@ -112,8 +114,10 @@ export const useAuthStore = create<IAuthStore>()(
                 }
             }
         })),
+
+        // Persist the auth state
         {
-            name: "auth",
+            name: "auth" ,
             onRehydrateStorage(){
                 return (state, error)=> {
                     if(!error) state?.setHydrated()

@@ -1,6 +1,7 @@
+"use client"
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { useAuthStore } from "@/store/Auth"
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Layout = ({children}: {children: React.ReactNode}) => {
