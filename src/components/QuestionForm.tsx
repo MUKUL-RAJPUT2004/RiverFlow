@@ -64,20 +64,24 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
             if (Date.now() > end) return;
 
             Confetti({
-                particleCount: 2,
-                angle: 60,
-                spread: 55,
-                startVelocity: 60,
-                origin: { x: 0, y: 0.5 },
-                colors: colors,
+                options: {
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    startVelocity: 60,
+                    origin: { x: 0, y: 0.5 },
+                    colors: colors,
+                },
             });
             Confetti({
-                particleCount: 2,
-                angle: 120,
-                spread: 55,
-                startVelocity: 60,
-                origin: { x: 1, y: 0.5 },
-                colors: colors,
+                options: {
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    startVelocity: 60,
+                    origin: { x: 1, y: 0.5 },
+                    colors: colors,
+                },
             });
 
             requestAnimationFrame(frame);
@@ -90,8 +94,8 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
         if (!formData.attachment) throw new Error("Please upload an image");
 
         const storageResponse = await storage.createFile(
-            questionAttachmentBucket,
-            ID.unique(),
+            questionAttachmentBucket,       //bucket Id
+            ID.unique(),                    //file Id
             formData.attachment
         );
 

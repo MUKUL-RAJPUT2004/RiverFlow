@@ -9,8 +9,8 @@ export default async function getOrCreateStorage() {
     } catch (error) {
         try {
             await storage.createBucket(
-                questionAttachmentBucket,
-                questionAttachmentBucket,
+                questionAttachmentBucket,   //bucket id which we gave simple the name of storage only
+                questionAttachmentBucket,   //bucket name which we will be reffering and saving by the name
                 [
                     Permission.create("users"),
                     Permission.read("any"),
