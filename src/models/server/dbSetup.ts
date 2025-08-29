@@ -8,12 +8,15 @@ import { databases } from "./config";
 
 export default async function getOrCreateDb(){
   try {
-    await databases.get(db);
+    await databases.get(db);    //get whole database
     console.log("Database connected successfully");
     
   } catch (error) {
     try {
-      await databases.create(db, db);
+      await databases.create(
+            db,   //dataBAseId: String
+            db    //name of that database: String
+          );
       console.log("Database created successfully");
 
       await Promise.all([
