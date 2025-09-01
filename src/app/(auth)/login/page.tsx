@@ -106,6 +106,11 @@ function LoginPage(){
                         className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                         type="button"
                         disabled={isLoading}
+                        onClick={() => {
+                            // You probably want to implement Google login here,
+                            // not the form submit handler.
+                            // For now, this is a placeholder.
+                        }}
                     >
                         <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
                         <span className="text-sm text-neutral-700 dark:text-neutral-300">

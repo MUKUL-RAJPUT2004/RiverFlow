@@ -28,7 +28,7 @@ const LabelInputContainer = ({
 
 
 function RegisterPage() {
-    const {createAccount, login} = useAuthStore()
+    const {login, createAccount} = useAuthStore()
     const [isLoading, setIsLoading] = React.useState(false)
     const [error, setError] = React.useState("")
 
@@ -91,17 +91,17 @@ function RegisterPage() {
                 <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-x-2 md:space-y-0">
                     <LabelInputContainer>
                         <Label htmlFor="firstname">First name</Label>
-                        <Input className="text-black" id="firstname" name="firstname" placeholder="Mukul" type="text" />
+                        <Input className="text-white" id="firstname" name="firstname" placeholder="Mukul" type="text" />
                     </LabelInputContainer>
                     <LabelInputContainer>
                         <Label htmlFor="lastname">Last name</Label>
-                        <Input className="text-black"  id="lastname" name="lastname" placeholder="Rajput" type="text" />
+                        <Input className="text-white"  id="lastname" name="lastname" placeholder="Rajput" type="text" />
                     </LabelInputContainer>
                 </div>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
-                    className="text-black" 
+                    className="text-white" 
                         id="email"
                         name="email"
                         placeholder="projectmayhem@fc.com"
@@ -110,7 +110,7 @@ function RegisterPage() {
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input className="text-black"  id="password" name="password" placeholder="••••••••" type="password" />
+                    <Input className="text-white"  id="password" name="password" placeholder="••••••••" type="password" />
                 </LabelInputContainer>
 
                 <button

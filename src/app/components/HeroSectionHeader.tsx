@@ -7,41 +7,54 @@ import { useAuthStore } from "@/store/Auth";
 import Link from "next/link";
 import React from "react";
 
+// Option 1: GATE Engineering focused icons
 const slugs = [
-    "typescript",
-    "javascript",
-    "dart",
+    // Core CS/IT subjects
+    "python",
+    "cplusplus",
+    "c",
     "java",
-    "react",
-    "flutter",
-    "android",
-    "html5",
-    "css3",
-    "nodedotjs",
-    "express",
-    "nextdotjs",
-    "prisma",
-    "amazonaws",
+    "mysql",
     "postgresql",
-    "firebase",
-    "nginx",
-    "vercel",
-    "testinglibrary",
-    "jest",
-    "cypress",
-    "docker",
+    "mongodb",
+    
+    // Academic/Learning platforms
+    "academia",           // Academic research
+    "khanacademy",       // Learning platform
+    "educative",         // Educational content
+    "futurelearn",       // Online learning
+    "greatlearning",     // Learning platform
+    
+    // Math and Science tools
+    "wolframmathematica", // Mathematical computing
+    "sagemath",          // Mathematics software
+    "libreofficemath",   // Math equations
+    
+    // Development tools (still relevant for CS students)
     "git",
-    "jira",
     "github",
-    "gitlab",
     "visualstudiocode",
-    "androidstudio",
-    "sonarqube",
-    "figma",
+    "linux",
+    "ubuntu",
+    "windows",
+    
+    // Data structures and algorithms tools
+    "jupyter",           // Data analysis
+    "numpy",             // Scientific computing
+    "tensorflow",        // Machine Learning
+    "pytorch",           // Deep Learning
+    "opencv",            // Computer Vision
+    
+    // General tech
+    "stackoverflow",     // Q&A platform
+    "discord",           // Community
 ];
+
+
 
 const HeroSectionHeader = () => {
     const { session } = useAuthStore();
+
 
     return (
         <div className="container mx-auto px-4">
@@ -52,8 +65,8 @@ const HeroSectionHeader = () => {
                 color="#ffffff"
                 refresh
             />
-            <div className="relative z-10 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="flex items-center justify-center">
+            <div className="relative z-10 grid grid-cols-1 gap-4 md:grid-cols-2 -translate-y-8 md:-translate-y-12">
+                <div className="flex items-center">
                     <div className="space-y-4 text-center">
                         <h1 className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent">
                             RiverFlow
@@ -93,9 +106,8 @@ const HeroSectionHeader = () => {
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                    <div className="relative max-w-[32rem] overflow-hidden">
-                        <IconCloud icons={slugs} />
-                    </div>
+                    <div className="relative overflow-hidden">
+                    <IconCloud icons={slugs} width={800} height={800} radius={200} iconSize={64} />                    </div>
                 </div>
             </div>
         </div>
