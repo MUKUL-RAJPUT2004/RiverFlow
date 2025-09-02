@@ -21,6 +21,7 @@ export default async function HeroSection() {
                 title: q.title,
                 link: `/questions/${q.$id}/${slugify(q.title)}`,
                 thumbnail: storage.getFilePreview(questionAttachmentBucket, q.attachmentId),
+                createdAt: q.createdAt,
             }))}
         />
     );

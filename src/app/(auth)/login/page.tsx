@@ -78,7 +78,7 @@ function LoginPage(){
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
-                    className="text-black"
+                    className="text-neutral-800 dark:text-neutral-200"
                         id="email"
                         name="email"
                         placeholder="projectmayhem@fc.com"
@@ -87,7 +87,7 @@ function LoginPage(){
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input className="text-black" id="password" name="password" placeholder="••••••••" type="password" />
+                    <Input className="text-neutral-800 dark:text-neutral-200" id="password" name="password" placeholder="••••••••" type="password" />
                 </LabelInputContainer>
 
                 <button
@@ -103,7 +103,7 @@ function LoginPage(){
 
                 <div className="flex flex-col space-y-4">
                     <button
-                        className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                        className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-neutral-800 dark:text-neutral-200 shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                         type="button"
                         disabled={isLoading}
                         onClick={() => {
@@ -119,7 +119,7 @@ function LoginPage(){
                         <BottomGradient />
                     </button>
                     <button
-                        className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+                        className="group/btn relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-neutral-800 dark:text-neutral-200 shadow-input dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                         type="button"
                         disabled={isLoading}
                     >
