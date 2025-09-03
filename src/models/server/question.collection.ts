@@ -21,7 +21,7 @@ export default async function createQuestionCollection() {
         databases.createStringAttribute(db, questionCollection, "content", 10000, true),
         databases.createStringAttribute(db, questionCollection, "authorId", 50, true),
         databases.createStringAttribute(db, questionCollection, "tags", 50, true, undefined, true),
-        databases.createStringAttribute(db, questionCollection, "attachemntId", 50, false)
+        databases.createStringAttribute(db, questionCollection, "attachmentId", 50, false)
     ]);
     console.log("Question Attributes created");
 

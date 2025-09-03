@@ -9,12 +9,15 @@ import { account } from "@/models/client/config";
 export interface UserPrefs {
     reputation: number
 }
+console.log("here in auth-store");
+
 interface IAuthStore {
     // STATE PROPERTIES
     session: Models.Session | null;
     jwt: string | null
     user: Models.User<UserPrefs> | null
     hydrated: boolean
+    
 
     // ACTIONS
     setHydrated(): void;
@@ -118,6 +121,8 @@ export const useAuthStore = create<IAuthStore>()(
         // Persist the auth state
         {
             name: "auth" ,
+            
+            
             onRehydrateStorage(){
                 return (state, error)=> {
                     if(!error) state?.setHydrated()

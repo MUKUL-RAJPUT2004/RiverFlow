@@ -10,10 +10,11 @@ import slugify from "@/utils/slugify";
 import { IconX } from "@tabler/icons-react";
 import { Models, ID } from "appwrite";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { databases, storage } from "@/models/client/config";
 import { db, questionAttachmentBucket, questionCollection } from "@/models/name";
 import { Confetti } from "@/components/magicui/confetti";
+
 
 const LabelInputContainer = ({
     children,
@@ -40,10 +41,15 @@ const LabelInputContainer = ({
  * ![INFO]: for buttons, refer to https://ui.aceternity.com/components/tailwindcss-buttons
  * ******************************************************************************
  */
+
+console.log("here in question form");
+
+
 const QuestionForm = ({ question }: { question?: Models.Document }) => {
     const { user } = useAuthStore();
     const [tag, setTag] = React.useState("");
     const router = useRouter();
+
 
     const [formData, setFormData] = React.useState({
         title: String(question?.title || ""),
@@ -52,6 +58,21 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
         tags: new Set((question?.tags || []) as string[]),
         attachment: null as File | null,
     });
+    
+
+    useEffect(() => {
+        // Only update if the user object is not null and the authorId is undefined
+        // beause before it was causing problem that authorid couldnt get value coz store was taking time to render and form was rendering instantaneously
+        if (user && formData.authorId === undefined) {
+            setFormData(prev => ({
+                ...prev,
+                authorId: user.$id,
+            }));
+        }
+    }, [user, formData.authorId]); //when `user` or `formData.authorId` changes
+
+    console.log(`authorId: ${formData.authorId}`);
+    
 
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState("");
@@ -191,12 +212,15 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
             </LabelInputContainer>
             <LabelInputContainer>
                 <Label htmlFor="content">
-                    What are the details of your problem?
-                    <br />
+               <div>
+               <div className="text-orange-400 ">What are the details of your problem?</div>
+                    <div>
                     <small>
                         Introduce the problem and expand on what you put in the title. Minimum 20
                         characters.
                     </small>
+                    </div>
+               </div>
                 </Label>
                 <RTE
                     value={formData.content}
