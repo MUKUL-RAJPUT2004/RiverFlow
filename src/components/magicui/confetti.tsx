@@ -99,7 +99,19 @@ const ConfettiComponent = forwardRef<ConfettiRef, Props>((props, ref) => {
 
   return (
     <ConfettiContext.Provider value={api}>
-      <canvas ref={canvasRef} {...rest} />
+      <canvas 
+        ref={canvasRef} 
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+          zIndex: 9999,
+        }}
+        {...rest} 
+      />
       {children}
     </ConfettiContext.Provider>
   );

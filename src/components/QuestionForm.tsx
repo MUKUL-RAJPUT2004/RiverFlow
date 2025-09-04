@@ -49,6 +49,8 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
     const { user } = useAuthStore();
     const [tag, setTag] = React.useState("");
     const router = useRouter();
+    const [showConfetti, setShowConfetti] = React.useState(false);
+
 
 
     const [formData, setFormData] = React.useState({
@@ -77,39 +79,7 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState("");
 
-    const loadConfetti = (timeInMS = 3000) => {
-        const end = Date.now() + timeInMS; // 3 seconds
-        const colors = ["#a786ff", "#fd8bbc", "#eca184", "#f8deb1"];
-
-        const frame = () => {
-            if (Date.now() > end) return;
-
-            Confetti({
-                options: {
-                    particleCount: 2,
-                    angle: 60,
-                    spread: 55,
-                    startVelocity: 60,
-                    origin: { x: 0, y: 0.5 },
-                    colors: colors,
-                },
-            });
-            Confetti({
-                options: {
-                    particleCount: 2,
-                    angle: 120,
-                    spread: 55,
-                    startVelocity: 60,
-                    origin: { x: 1, y: 0.5 },
-                    colors: colors,
-                },
-            });
-
-            requestAnimationFrame(frame);
-        };
-
-        frame();
-    };
+    
 
     const create = async () => {
         if (!formData.attachment) throw new Error("Please upload an image");
@@ -128,7 +98,10 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
             attachmentId: storageResponse.$id,
         });
 
-        loadConfetti();
+        console.log("Setting confetti to true for create");
+        setShowConfetti(true); // Show confetti 🎉
+        // Hide after 3s (optional)
+        setTimeout(() => setShowConfetti(false), 3000);
 
         return response;
     };
@@ -158,6 +131,11 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
             attachmentId: attachmentId,
         });
 
+        console.log("Setting confetti to true for update");
+        setShowConfetti(true); // Show confetti for updates too 🎉
+        // Hide after 3s (optional)
+        setTimeout(() => setShowConfetti(false), 3000);
+
         return response;
     };
 
@@ -176,7 +154,10 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
         try {
             const response = question ? await update() : await create();
 
-            router.push(`/questions/${response.$id}/${slugify(formData.title)}`);
+            // Add a delay before navigation to show confetti
+            setTimeout(() => {
+                router.push(`/questions/${response.$id}/${slugify(formData.title)}`);
+            }, 2000); // Wait 2 seconds to show confetti
         } catch (error: any) {
             setError(() => error.message);
         }
@@ -193,6 +174,19 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                     </div>
                 </LabelInputContainer>
             )}
+            {showConfetti && (
+                <div className="fixed inset-0 z-50 pointer-events-none">
+                    {/* Confetti component rendering */}
+                    <Confetti
+                        options={{
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        }}
+                    />
+                </div>
+            )}
+
             <LabelInputContainer>
                 <Label htmlFor="title">
                     Title Address
