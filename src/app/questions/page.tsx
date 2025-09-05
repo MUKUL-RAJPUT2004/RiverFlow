@@ -1,13 +1,16 @@
+
+
 import { databases, users } from "@/models/server/config";
 import { answerCollection, db, voteCollection, questionCollection } from "@/models/name";
 import { Query } from "node-appwrite";
 import React from "react";
-import Link from "next/link";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import QuestionCard from "@/components/QuestionCard";
 import { UserPrefs } from "@/store/Auth";
 import Pagination from "@/components/Pagination";
 import Search from "./Search";  
+
+import AskQuestionButton from "@/components/ui/AskQuestionButton";
 
 const Page = async ({
     searchParams,
@@ -63,17 +66,15 @@ const Page = async ({
         })
     );
 
+    
+
     return (
         <div className="container mx-auto px-4 pb-20 pt-36">
             <div className="mb-10 flex items-center justify-between">
                 <h1 className="text-3xl font-bold">All Questions</h1>
-                <Link href="/questions/ask">
-                    <ShimmerButton className="shadow-2xl">
-                        <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-                            Ask a question
-                        </span>
-                    </ShimmerButton>
-                </Link>
+                
+                    <AskQuestionButton />
+                
             </div>
             <div className="mb-4">
                 <Search />

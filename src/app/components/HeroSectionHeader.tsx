@@ -109,19 +109,19 @@ const HeroSectionHeader = () => {
                     <div className="relative overflow-hidden">
                             {/* xs */}
                             <div className="block sm:hidden">
-                            <IconCloud icons={slugs} width={320} height={320} radius={110} iconSize={30} />
+                            <IconCloud icons={slugs} width={320} height={320} radius={120} iconSize={45} />
                             </div>
                             {/* sm */}
                             <div className="hidden sm:block md:hidden">
-                            <IconCloud icons={slugs} width={480} height={480} radius={140} iconSize={36} />
+                            <IconCloud icons={slugs} width={480} height={480} radius={150} iconSize={40} />
                             </div>
                             {/* md */}
                             <div className="hidden md:block lg:hidden">
-                            <IconCloud icons={slugs} width={640} height={640} radius={170} iconSize={48} />
+                            <IconCloud icons={slugs} width={640} height={640} radius={180} iconSize={55} />
                             </div>
                             {/* lg+ */}
                             <div className="hidden lg:block">
-                            <IconCloud icons={slugs} width={800} height={800} radius={200} iconSize={64} />
+                            <IconCloud icons={slugs} width={800} height={800} radius={200} iconSize={80} />
                             </div>
                     </div>
                 </div>

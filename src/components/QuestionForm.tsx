@@ -82,20 +82,24 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
     
 
     const create = async () => {
-        if (!formData.attachment) throw new Error("Please upload an image");
-
-        const storageResponse = await storage.createFile(
-            questionAttachmentBucket,       //bucket Id
-            ID.unique(),                    //file Id
-            formData.attachment
-        );
+        let attachmentId = null;
+        
+        if(formData.attachment){
+            const storageResponse = await storage.createFile(
+                questionAttachmentBucket,       //bucket Id
+                ID.unique(),                    //file Id
+                formData.attachment
+            );
+            attachmentId = storageResponse.$id;
+        }
+       
 
         const response = await databases.createDocument(db, questionCollection, ID.unique(), {
             title: formData.title,
             content: formData.content,
             authorId: formData.authorId,
             tags: Array.from(formData.tags),
-            attachmentId: storageResponse.$id,
+            attachmentId: attachmentId
         });
 
         console.log("Setting confetti to true for create");

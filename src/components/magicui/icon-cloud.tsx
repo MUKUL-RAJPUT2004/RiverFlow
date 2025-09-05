@@ -99,7 +99,8 @@ export function IconCloud({ icons, images, width = 400, height = 400, radius = 1
               const svgString = icon.svg;
               if (svgString) {
                 const img = new Image();
-                const svgWithColor = svgString.replace('<svg', '<svg fill="#666"');
+                // Use original icon color instead of forcing gray
+                const svgWithColor = svgString.includes('fill=') ? svgString : svgString.replace('<svg', `<svg fill="#${icon.hex}"`);
                 img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgWithColor);
                 img.onload = () => {
                   offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
@@ -112,7 +113,7 @@ export function IconCloud({ icons, images, width = 400, height = 400, radius = 1
                   const fallbackIcon = simpleIcons.siGithub as unknown as SimpleIcon | undefined;
                   if (fallbackIcon) {
                     const fallbackImg = new Image();
-                    const fallbackSvg = fallbackIcon.svg.replace('<svg', '<svg fill="#666"');
+                    const fallbackSvg = fallbackIcon.svg.includes('fill=') ? fallbackIcon.svg : fallbackIcon.svg.replace('<svg', `<svg fill="#${fallbackIcon.hex}"`);
                     fallbackImg.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(fallbackSvg);
                     fallbackImg.onload = () => {
                       offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
@@ -128,7 +129,7 @@ export function IconCloud({ icons, images, width = 400, height = 400, radius = 1
               const fallbackIcon = simpleIcons.siGithub as unknown as SimpleIcon | undefined;
               if (fallbackIcon) {
                 const img = new Image();
-                const svgWithColor = fallbackIcon.svg.replace('<svg', '<svg fill="#666"');
+                const svgWithColor = fallbackIcon.svg.includes('fill=') ? fallbackIcon.svg : fallbackIcon.svg.replace('<svg', `<svg fill="#${fallbackIcon.hex}"`);
                 img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgWithColor);
                 img.onload = () => {
                   offCtx.clearRect(0, 0, offscreen.width, offscreen.height);

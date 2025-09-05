@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Fix for Google Fonts compatibility with Turbopack
+  experimental: {
+    optimizePackageImports: ['@vercel/turbopack-next'],
+  },
 };
 
 export default nextConfig;
