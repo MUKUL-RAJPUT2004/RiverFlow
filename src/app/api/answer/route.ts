@@ -3,8 +3,7 @@ import { databases, users } from "@/models/server/config";
 import { NextRequest, NextResponse } from "next/server";
 import { ID } from "node-appwrite";
 import { UserPrefs } from "@/store/Auth";
-import error from "next/error";
-import { stat } from "fs";
+import { AppwriteException } from "node-appwrite";
 
 export async function POST(request: NextRequest){
     try {
@@ -56,14 +55,39 @@ export async function DELETE(request: NextRequest) {
             {status: 200}
         )
         
-    } catch (error: any) {
+    } catch (error) {
+        // Check if the error is a specific exception from Appwrite
+        if (error instanceof AppwriteException) {
+            return NextResponse.json(
+                {
+                    message: error.message, // Use the detailed message from the exception
+                },
+                {
+                    status: error.code, // Use the actual HTTP status code from Appwrite (e.g., 401, 404)
+                }
+            );
+        }
+    
+        // Check for a standard JavaScript Error as a fallback
+        if (error instanceof Error) {
+            return NextResponse.json(
+                {
+                    message: error.message,
+                },
+                {
+                    status: 500, // Default to 500 for generic server errors
+                }
+            );
+        }
+    
+        // Handle any other case where the thrown value is not an Error object
         return NextResponse.json(
             {
-                message: error?.message || "Error deleting answer",
+                message: "Error deleting answer",
             },
             {
-                status: error?.status || error?.code || 500,
+                status: 500,
             }
-        )
+        );
     }
 }
