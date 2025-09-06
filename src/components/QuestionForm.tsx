@@ -162,14 +162,8 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
             setTimeout(() => {
                 router.push(`/questions/${response.$id}/${slugify(formData.title)}`);
             }, 2000); // Wait 2 seconds to show confetti
-        } catch (error) {
-            if (error instanceof Error) {
-                // Now TypeScript knows `error` has a `message` property
-                setError(() => error.message);
-            } else {
-                // Handle cases where the thrown value isn't a standard Error
-                setError(() => "An unexpected error occurred");
-            }
+        } catch (error: any) {
+            setError(() => error.message);
         }
 
         setLoading(() => false);

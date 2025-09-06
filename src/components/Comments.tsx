@@ -43,15 +43,8 @@ const Comments = ({
                 total: prev.total + 1,
                 documents: [{ ...response, author: user }, ...prev.documents],
             }));
-        } catch (error) {
-            let errorMessage = "Error creating comment"; // A default message
-
-            // Check if the error is a standard Error object
-            if (error instanceof Error) {
-                errorMessage = error.message;
-    }
-    
-    window.alert(errorMessage);
+        } catch (error: any) {
+            window.alert(error?.message || "Error creating comment");
         }
     };
 
@@ -63,14 +56,9 @@ const Comments = ({
                 total: prev.total - 1,
                 documents: prev.documents.filter(comment => comment.$id !== commentId),
             }));
-        } catch (error) {
-            let errorMessage = "Error creating comment"; // A default message
-
-            // Check if the error is a standard Error object
-            if (error instanceof Error) {
-                errorMessage = error.message;
+        } catch (error: any) {
+            window.alert(error?.message || "Error deleting comment");
         }
-    }
     };
 
     return (

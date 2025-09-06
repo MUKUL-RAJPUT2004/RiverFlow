@@ -16,13 +16,8 @@ const DeleteQuestion = ({ questionId, authorId }: { questionId: string; authorId
             await databases.deleteDocument(db, questionCollection, questionId);
 
             router.push("/questions");
-        } catch (error) {
-            let errorMessage = "Something went wrong in deleting ques"; // A default message
-
-            // Check if the error is a standard Error object
-            if (error instanceof Error) {
-                errorMessage = error.message;        
-            }        
+        } catch (error: any) {
+            window.alert(error?.message || "Something went wrong");
         }
     };
 
