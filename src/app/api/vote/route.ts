@@ -2,7 +2,7 @@ import { answerCollection, db, questionCollection , voteCollection} from "@/mode
 import { databases, users } from "@/models/server/config";
 import { UserPrefs } from "@/store/Auth";
 import { NextRequest, NextResponse } from "next/server";
-import { ID, Query } from "node-appwrite";
+import { AppwriteException, ID, Query } from "node-appwrite";
 
 export async function POST(request: NextRequest){
     try {
@@ -92,14 +92,38 @@ export async function POST(request: NextRequest){
 
         
 
-    } catch (error: any) {
+    } catch (error) {
+        if (error instanceof AppwriteException) {
+            return NextResponse.json(
+                {
+                    error: error.message, // Use the message from the exception
+                },
+                {
+                    status: error.code, // Appwrite exceptions use `code` for the HTTP status
+                }
+            );
+        }
+
+        // 3. Check for a generic Error as a fallback
+    if (error instanceof Error) {
         return NextResponse.json(
-                    {
-                        error: error?.message || "Error in voting.",
-                    },
-                    {
-                        status: error?.status || error?.code || 500,
-                    }
-                )
+            {
+                error: error.message,
+            },
+            {
+                status: 500, // Generic errors get a default 500 status
+            }
+        );
+    }
+
+    // 4. Handle any other unknown cases
+    return NextResponse.json(
+        {
+            error: "An unknown error occurred in voting",
+        },
+        {
+            status: 500,
+        }
+    );
     }
 }

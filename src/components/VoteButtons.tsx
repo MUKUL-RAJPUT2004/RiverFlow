@@ -63,8 +63,13 @@ const VoteButtons = ({
 
             setVoteResult(() => data.data.voteResult);
             setVotedDocument(() => data.data.document);
-        } catch (error: any) {
-            window.alert(error?.message || "Something went wrong");
+        } catch (error) {
+            let errorMessage = "Something went wrong in voting system"; // A default message
+
+            // Check if the error is a standard Error object
+            if (error instanceof Error) {
+                errorMessage = error.message;        
+            }
         }
     };
 
@@ -90,8 +95,13 @@ const VoteButtons = ({
 
             setVoteResult(() => data.data.voteResult);
             setVotedDocument(() => data.data.document);
-        } catch (error: any) {
-            window.alert(error?.message || "Something went wrong");
+        } catch (error) {
+            let errorMessage = "Something went wrong in voting system"; // A default message
+
+            // Check if the error is a standard Error object
+            if (error instanceof Error) {
+                errorMessage = error.message;        
+            }
         }
     };
 

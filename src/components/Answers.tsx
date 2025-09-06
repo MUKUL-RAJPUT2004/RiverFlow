@@ -55,9 +55,14 @@ const Answers = ({
                     ...prev.documents,
                 ],
             }));
-        } catch (error: any) {
-            window.alert(error?.message || "Error creating answer");
+        } catch (error) {
+            let errorMessage = "Error deleting answer"; // A default message
+
+            // Check if the error is a standard Error object
+            if (error instanceof Error) {
+                errorMessage = error.message;
         }
+    }
     };
 
     const deleteAnswer = async (answerId: string) => {
@@ -77,9 +82,14 @@ const Answers = ({
                 total: prev.total - 1,
                 documents: prev.documents.filter(answer => answer.$id !== answerId),
             }));
-        } catch (error: any) {
-            window.alert(error?.message || "Error deleting answer");
-        }
+        } catch (error) {
+            let errorMessage = "Error deleting answer"; // A default message
+
+            // Check if the error is a standard Error object
+            if (error instanceof Error) {
+                errorMessage = error.message;
+                    }
+             }
     };
 
     return (
