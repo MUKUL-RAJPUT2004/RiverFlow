@@ -26,16 +26,39 @@ export async function POST(request: NextRequest){
         })
         
 
-    } catch (error: any) {
-        return NextResponse.json(
-            {
-                error: error?.message || "Error creating answer",
-            },
-            {
-                status: error?.status || error?.code || 500,
-            }
-        )
+    }  catch (error: unknown) {
+    // Define default error message and status code
+    let errorMessage = "Error creating answer";
+    let statusCode = 500;
+
+    // Check if the error is an object that might contain our desired properties
+    if (typeof error === "object" && error !== null) {
+        // Check for a 'message' property
+        if ("message" in error && typeof (error as { message: unknown }).message === "string") {
+            errorMessage = (error as { message: string }).message;
+        }
+
+        // Check for a 'status' property (as a number)
+        if ("status" in error && typeof (error as { status: unknown }).status === "number") {
+            statusCode = (error as { status: number }).status;
+        } 
+        // Else, check for a 'code' property (as a number)
+        else if ("code" in error && typeof (error as { code: unknown }).code === "number") {
+            statusCode = (error as { code: number }).code;
+        }
     }
+    
+
+    // Return the final, safe response
+    return NextResponse.json(
+        {
+            error: errorMessage,
+        },
+        {
+            status: statusCode,
+        }
+    );
+}
 }
 
 export async function DELETE(request: NextRequest) {

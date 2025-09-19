@@ -162,9 +162,18 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
             setTimeout(() => {
                 router.push(`/questions/${response.$id}/${slugify(formData.title)}`);
             }, 2000); // Wait 2 seconds to show confetti
-        } catch (error: any) {
-            setError(() => error.message);
-        }
+        } catch (error: unknown) {
+                // Define a default error message
+                let errorMessage = "An unexpected error occurred.";
+
+                // Check if the error is a standard Error object
+                if (error instanceof Error) {
+                    errorMessage = error.message;
+                }
+
+                // Update the state with the safe error message
+                setError(errorMessage);
+            }
 
         setLoading(() => false);
     };

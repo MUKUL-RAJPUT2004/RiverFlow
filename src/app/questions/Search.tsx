@@ -16,8 +16,8 @@ const Search = () => {
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newSearchParams = new URLSearchParams(searchParams);
-        newSearchParams.set("search", search);
+        const newSearchParams = new URLSearchParams(searchParams);      //copies the current search params as the current url from next js is read only , for editing we need to make our copy and then later use router.push to go to the next url
+        newSearchParams.set("search", search);              //set the search param to the current search state
         router.push(`${pathname}?${newSearchParams}`);
     };
 

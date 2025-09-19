@@ -55,8 +55,12 @@ const Answers = ({
                     ...prev.documents,
                 ],
             }));
-        } catch (error: any) {
-            window.alert(error?.message || "Error creating answer");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                window.alert(error.message);
+            } else {
+                window.alert("Error creating answer");
+            }
         }
     };
 
@@ -77,8 +81,12 @@ const Answers = ({
                 total: prev.total - 1,
                 documents: prev.documents.filter(answer => answer.$id !== answerId),
             }));
-        } catch (error: any) {
-            window.alert(error?.message || "Error deleting answer");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                window.alert(error.message);
+            } else {
+                window.alert("Error deleting answer");
+            }
         }
     };
 
