@@ -10,6 +10,8 @@ export const useIconSlugs = (slugs: string[] | undefined) => {
     const iconSlugs = useMemo(
         () =>
             slugs?.reduce((acc, slug) => {
+                // Add this comment on the line right before the error
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const icon = (SimpleIcons as any).Get(slug);
                 if (icon) {
                     acc.push(icon);
